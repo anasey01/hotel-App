@@ -29,12 +29,12 @@ class Hotel{
         })
     }
 
-    makeGymReservation(){
-        return `Thank you ${object.reservation.fullname}, your Gym reservation was successful!`;
+    makeGymReservation(object){
+        (object.reservation.fullname === undefined) ? "You can not use the Gym facility": `Thank you ${object.reservation.fullname}, your Gym reservation was successful!`;
     }
 
-    makeRestaurantReservation(){
-        return `Thank you ${object.reservation.fullname}, your Gym reservation was successful!`;
+    makeRestaurantReservation(object){
+        (object.reservation.fullname === undefined)? "You can not use the resturant facility" : `Thank you ${object.reservation.fullname}, your resturant reservation was successful!`;
     }
 
     provideHotelInformation(object){
@@ -46,6 +46,11 @@ class Hotel{
                 zipcode:object.reservation.addressOfHotel.zipcode,
             },
             nameOfHotelMangaer : object.hotelInformation.nameOfHotelMangaer,
+            rooms: {
+                numberOfRoomsInHotel: Math.floor(Math.random() * 200 + 1),
+                type: ["Single", "Delux", "Luxury"],
+                price: ["2500","3500","5000"],
+            },
             facilities: {
                 electricity: object.hotelInformation.facilities.electricity,
                 restaurant: object.hotelInformation.facilities.restaurant,
@@ -56,9 +61,31 @@ class Hotel{
             }
         })
     }
-    getHotelInformation(index){
-        return this.hotelInformation;
+
+    getRoomInformation(index){
+        var typeOfRooms = this.hotelInformation[index].rooms.type;
+        var numberOfRoomTypes = typeOfRooms.length;
+        var prices = this.hotelInformation[index].rooms.price;
+        var typeOfRoomsString = "";
+        var pricesOfRoomString = "";
+        for(var i = 0; i < numberOfRoomTypes; i++){
+            if(i === typeOfRooms.length - 1){
+                typeOfRoomsString += " and ";
+                pricesOfRoomString += " and ";
+            }
+            typeOfRoomsString += typeOfRooms[i] + " ,";
+            pricesOfRoomString += prices[i] + " ,";
+        }
+
+        return `${this.hotelInformation[index].nameOfHotel} has ${numberOfRoomTypes} room types which are ${typeOfRoomsString} and Prices ${pricesOfRoomString} respectively`
     }
+
+    getHotelInformation(index){
+        return this.hotelInformation[index];
+    }
+
+
+
 
 }
 /*
@@ -95,6 +122,11 @@ var obj = {
     },
     hotelInformation : {
         nameOfHotelMangaer: randomManagerName,
+        rooms: {
+            numberOfRoomsInHotel: Math.floor(Math.random() * 200 + 1),
+            type: ["Single", "Delux", "Luxury"],
+            price: ["2500","3500","5000"],
+        },
         facilities : {
             electricity: true,
             restaurant : true,
@@ -107,10 +139,11 @@ var obj = {
 }
 
 var sheraton = new Hotel();
-console.log(sheraton.makeHotelReservation(obj));
+sheraton.makeHotelReservation(obj);
 sheraton.makeHotelReservation(obj)
 sheraton.makeHotelReservation(obj)
-// sheraton.provideHotelInformation(obj);
-// console.log(sheraton.getHotelInformation(0));
-console.log(sheraton.getReservations());
+sheraton.provideHotelInformation(obj);
+console.log(sheraton.getHotelInformation(0));
+sheraton.getRoomInformation(0);
+// console.log(sheraton.getReservations());
 // console.log(sheraton.getDetails(1));
