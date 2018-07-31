@@ -1,0 +1,23 @@
+{
+  "name": "hotel-App",
+  "version": "1.0.0",
+  "description": "",
+  "main": "hotel.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anasey01/hotel-App.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anasey01/hotel-App/issues"
+  },
+  "homepage": "https://github.com/anasey01/hotel-App#readme",
+  "dependencies": {
+    "faker": "^4.1.0"
+  }
+}
